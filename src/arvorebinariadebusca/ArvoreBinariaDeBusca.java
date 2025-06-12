@@ -21,10 +21,11 @@ public class ArvoreBinariaDeBusca {
         return raiz;
     }
 
-    // 1. Contar nós não-folhas
+    // 1. Função que conte o número de nós não folhas em uma ABB simples.
     public int contarNaoFolhas() {
         return NoNaoFolhas(raiz);
     }
+    
     private int NoNaoFolhas(No no) {
         if (no == null || (no.esquerda == null && no.direita == null)) {
             return 0;
@@ -32,8 +33,33 @@ public class ArvoreBinariaDeBusca {
         return 1 + NoNaoFolhas(no.esquerda) + NoNaoFolhas(no.direita);
     }
 
-    public static void main(String[] args) {
+    //  função que conte o número de nós folhas em uma ABB simples.
+    public int contarFolhas() {
+        return contarFolhas(raiz);
+    }
 
+    private int contarFolhas(No no) {
+        if (no == null) {
+            return 0;
+        }
+        if (no.esquerda == null && no.direita == null) {
+            return 1;
+        }
+        return contarFolhas(no.esquerda) + contarFolhas(no.direita);
+    }
+
+    public static void main(String[] args) {
+        ArvoreBinariaDeBusca arvore = new ArvoreBinariaDeBusca();
+
+        int[] valores = {10, 5, 15, 2, 7, 12, 20, 6, 8};
+
+        for (int valor = 0; valor < valores.length; valor++) {
+            arvore.inserir(valor);
+
+        }
+
+        System.out.println("Nos nao folhas: " + arvore.contarNaoFolhas());
+        System.out.println("Nós folhas: " + arvore.contarFolhas());
     }
 
 }
