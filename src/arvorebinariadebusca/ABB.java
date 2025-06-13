@@ -121,7 +121,7 @@ public class ABB {
         return no;
     }
 
-    // 5. Encontrar maior número
+    // 5. Funcao que encontra o maior número
     public int encontrarMaior() {
         if (raiz == null) {
             throw new RuntimeException("Árvore vazia");
@@ -131,6 +131,24 @@ public class ABB {
             atual = atual.direita;
         }
         return atual.chave;
+    }
+
+    
+    public void imprimirArvore() {
+        imprimirArvoreRec(raiz, 0);
+    }
+
+    private void imprimirArvoreRec(No no, int nivel) {
+        if (no != null) {
+            imprimirArvoreRec(no.direita, nivel + 1);
+
+            for (int i = 0; i < nivel; i++) {
+                System.out.print("    "); // 4 espaços por nível
+            }
+            System.out.println(no.chave);
+
+            imprimirArvoreRec(no.esquerda, nivel + 1);
+        }
     }
 
 }
