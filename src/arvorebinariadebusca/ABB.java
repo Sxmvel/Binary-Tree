@@ -61,5 +61,50 @@ public class ABB {
         return 1 + Math.max(alturaRec(no.esquerda), alturaRec(no.direita));
     }
     
+     // 4. Funcao para remover todos os nós com chave par
+    public void removerNosPares() {
+        raiz = removerNosParesRec(raiz);
+    }
+
+    private No removerNosParesRec(No no) {
+        if (no == null) return null;
+
+        no.esquerda = removerNosParesRec(no.esquerda);
+        no.direita = removerNosParesRec(no.direita);
+
+        if (no.chave % 2 == 0) {
+            if (no.esquerda == null) return no.direita;
+            if (no.direita == null) return no.esquerda;
+
+            // Substituir por menor valor da subárvore direita
+            No substituto = encontrarMinimo(no.direita);
+            no.chave = substituto.chave;
+            no.direita = removerRec(no.direita, substituto.chave);
+        }
+
+        return no;
+    }
+
+    private No encontrarMinimo(No no) {
+        while (no.esquerda != null)
+            no = no.esquerda;
+        return no;
+    }
+
+    private No removerRec(No no, int chave) {
+        if (no == null) return null;
+        if (chave < no.chave)
+            no.esquerda = removerRec(no.esquerda, chave);
+        else if (chave > no.chave)
+            no.direita = removerRec(no.direita, chave);
+        else {
+            if (no.esquerda == null) return no.direita;
+            if (no.direita == null) return no.esquerda;
+            No temp = encontrarMinimo(no.direita);
+            no.chave = temp.chave;
+            no.direita = removerRec(no.direita, temp.chave);
+        }
+        return no;
+    }
     
 }

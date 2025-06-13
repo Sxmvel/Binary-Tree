@@ -15,6 +15,15 @@ public class ArvoreBinariaDeBusca {
         System.out.println("Nos nao folhas: " + arvore.contarNaoFolhas());
         System.out.println("Nos folhas: " + arvore.contarFolhas());
         System.out.println("Altura da árvore: " + arvore.altura());
+        
+        arvore.removerNosPares();
+        
+        
+        for (int i = 0; i < valores.length; i++) {
+            
+            arvore.inserir(i);
+            
+        }
     }
 
 }
